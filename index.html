@@ -261,7 +261,7 @@ a, button, input, textarea {
 
 /* Header Styles */
 header {
-    padding: 40px 0;
+    padding: 20px 0;
     position: relative;
     overflow: hidden;
     background-color: rgba(42, 46, 51, 0.4);
@@ -285,7 +285,7 @@ header .container {
 
 .logoTop {
     font-size: 1.75rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: var(--soft-ivory);
     font-weight: 500;
     letter-spacing: 2px;
@@ -310,8 +310,8 @@ header .container {
 
 /* Navigation */
 nav {
-    margin: 30px 0;
-    margin-bottom: 50px;
+    margin: 15px 0;
+    margin-bottom: 25px;
     position: relative;
     z-index: 1;
 }
@@ -456,7 +456,8 @@ nav {
 
 /* Hero Section */
 .hero {
-    height: 68vh;
+    min-height: 68vh;
+    padding-bottom: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -523,7 +524,7 @@ nav {
     color: var(--soft-ivory);
     border: none;
     padding: 15px 55px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     font-family: 'Roboto Mono', monospace;
     font-size: 1rem;
     cursor: pointer;
@@ -1412,7 +1413,7 @@ footer {
     
     /* Header adjustments */
     header {
-        padding: 20px 0;
+        padding: 10px 0;
     }
     
     header .container {
@@ -1426,8 +1427,9 @@ footer {
     
     /* Hero section mobile */
     .hero {
-        height: 60vh;
+        min-height: 60vh;
         padding: 0 20px;
+        padding-bottom: 30px;
     }
     
     .hero img {
@@ -1494,8 +1496,9 @@ footer {
     }
     
     .hero {
-        height: 50vh;
+        min-height: 50vh;
         padding: 0 15px;
+        padding-bottom: 20px;
     }
     
     .hero img {
@@ -1785,16 +1788,16 @@ footer {
 
 <!-- Hero Section -->
 <section class="hero" id="home">
-<div class="container">
-    <img src="assets/logo.svg" class="logo" alt="Zeyad Digital Logo" width="400" height="400">
-    <p class="hero-subtitle">Freelance graphic designer and coder creating engaging digital experiences, combining visual design, scripting, and creative problem-solving.</p>
-    <button class="cta-button">VIEW MY WORK</button>
-</div>
 <div class="tech-grid">
     <div class="tech-line vertical-line" style="left: 30%"></div>
     <div class="tech-line vertical-line" style="left: 50%"></div>
     <div class="tech-circle" style="width: 150px; height: 150px; top: 20%; left: 50%"></div>
     <div class="tech-circle" style="width: 300px; height: 300px; top: 60%; left: 10%"></div>
+</div>
+<div class="container">
+    <img src="assets/logo.svg" class="logo" alt="Zeyad Digital Logo" width="400" height="400">
+    <p class="hero-subtitle">Freelance graphic designer and coder creating engaging digital experiences, combining visual design, scripting, and creative problem-solving.</p>
+    <button class="cta-button">VIEW MY WORK</button>
 </div>
 </section>
 
