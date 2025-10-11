@@ -57,6 +57,8 @@ a, button, input, textarea {
     transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-radius 0.2s ease;
 }
 
+.modal-open .cursor { z-index: 10002; }
+
 .cursor.hover {
     width: 20px;
     height: 20px;
@@ -124,26 +126,7 @@ a, button, input, textarea {
             animation: float-3 20s ease-in-out infinite alternate;
         }
 
-        .noise-overlay {
-            background-size: 200px 200px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.08;
-            z-index: 5;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            animation: grain-shift 8s infinite linear;
-        }
-
-        @keyframes grain-shift {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-5px, -5px); }
-            50% { transform: translate(-10px, 5px); }
-            75% { transform: translate(5px, -10px); }
-            100% { transform: translate(0, 0); }
-        }
+        
         
         /* Mobile Performance Optimizations */
         @media (max-width: 768px) {
@@ -156,7 +139,7 @@ a, button, input, textarea {
                 animation-duration: 25s; /* Slower animations */
             }
             
-            .glow {
+            .gradient-background .glow {
                 animation-duration: 12s; /* Slower pulse */
                 filter: blur(20px); /* Reduce blur intensity */
             }
@@ -216,7 +199,7 @@ a, button, input, textarea {
             z-index: 2;
         }
 
-        .glow {
+        .gradient-background .glow {
             position: absolute;
             width: 40vw;
             height: 40vh;
@@ -287,18 +270,13 @@ header .container {
     font-size: 1.75rem;
     margin-bottom: 10px;
     color: var(--soft-ivory);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 2px;
     position: relative;
     flex: 0 0 auto; /* Prevent the logo from stretching */
     margin-right: 40px; /* Increase space after logo */
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background: linear-gradient(45deg, var(--soft-ivory), var(--burnt-coral));
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient-shift 8s ease-in-out infinite;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
 
@@ -457,12 +435,7 @@ nav {
 /* Hero Section */
 .hero {
     min-height: 68vh;
-    padding-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    padding: 80px 0 40px; /* add top padding to sit below header */
     position: relative;
     background-color: rgba(42, 46, 51, 0.4);
 }
@@ -470,7 +443,7 @@ nav {
 .hero img {
     width: 400px;
     height: 400px;
-    margin-top: 100px;
+    margin-top: 0;
     margin-bottom: 40px;
     animation: neon-glow 3s infinite alternate, float-gentle 6s ease-in-out infinite;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -488,24 +461,17 @@ nav {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 30px;
     color: var(--soft-ivory);
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.1;
     position: relative;
-    z-index: 1;
-    background: linear-gradient(45deg, var(--soft-ivory), var(--burnt-coral), var(--muted-gold));
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 4s ease-in-out infinite;
+    z-index: 100;
+    letter-spacing: 1.5px;
 }
 
-@keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
+/* Removed gradient-shift animation; solid text for cross-browser reliability */
 
 
 
@@ -516,29 +482,40 @@ nav {
     color: var(--soft-ivory);
     opacity: 0.9;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .cta-button {
+    padding: 15px 55px;
+    margin-bottom: 30px;
+    z-index: 1;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Shared button base styles */
+.btn {
     background: linear-gradient(45deg, var(--burnt-coral), var(--deep-plum));
     color: var(--soft-ivory);
     border: none;
-    padding: 15px 55px;
-    margin-bottom: 30px;
     font-family: 'Roboto Mono', monospace;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
-    z-index: 1;
     letter-spacing: 1px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(217, 79, 50, 0.3);
     backdrop-filter: blur(10px);
 }
 
-.cta-button::before {
+/* Shared hover utility */
+.hover-raise:hover {
+    transform: translateY(-3px);
+}
+
+.btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -549,13 +526,112 @@ nav {
     transition: all 0.6s;
 }
 
-.cta-button:hover {
+.btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
-.cta-button:hover::before {
+.btn:hover::before {
     left: 100%;
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Outline/transparent gradient text button */
+.btn-outline {
+    background: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: none;
+}
+
+.cta-row {
+    display: inline-flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* Remodel hero helpers */
+.gradient-text {
+    background: linear-gradient(90deg, var(--burnt-coral), var(--deep-plum));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--soft-ivory);
+}
+/* Neon glow for gradient text */
+.gradient-text.neon {
+    animation: text-neon-glow 3s infinite alternate;
+}
+@keyframes text-neon-glow {
+    0% { text-shadow: 0 0 6px #D94F46, 0 0 14px #D94F46, 0 0 22px rgba(217,79,70,0.35); }
+    25% { text-shadow: 0 0 6px #4A2673, 0 0 14px #4A2673, 0 0 22px rgba(74,38,115,0.35); }
+    50% { text-shadow: 0 0 6px #BFA55A, 0 0 14px #BFA55A, 0 0 22px rgba(191,165,90,0.35); }
+    75% { text-shadow: 0 0 6px #4A2673, 0 0 14px #4A2673, 0 0 22px rgba(74,38,115,0.35); }
+    100% { text-shadow: 0 0 6px #D94F46, 0 0 14px #D94F46, 0 0 22px rgba(217,79,70,0.35); }
+}
+
+/* Layered text: white foreground over animated gradient background */
+.text-stack {
+    position: relative;
+    display: inline-block;
+}
+.text-stack .text-front {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(90deg, var(--burnt-coral), var(--deep-plum));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: 0 0 2px rgba(255,255,255,0.35);
+}
+.text-stack::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, var(--burnt-coral), var(--deep-plum));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: text-neon-glow 3s infinite alternate;
+    opacity: 0.6; /* slightly reduced for subtlety */
+    pointer-events: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+.hero-title.glow {
+    text-shadow: 0 0 10px rgba(217, 79, 50, 0.5);
+}
+
+.hero .container.hero-layout {
+    min-height: 68vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 0;
+}
+
+.hero-content {
+    min-width: 0;
+    text-align: left;
+    position: relative;
+    z-index: 5;
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* About Section */
@@ -584,6 +660,12 @@ nav {
     background-color: var(--burnt-coral);
 }
 
+.contact .section-title::after {
+    background: linear-gradient(90deg, rgba(217,79,70,0.2), rgba(217,79,70,1), rgba(191,165,90,0.8), rgba(74,38,115,1), rgba(217,79,70,0.2));
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+}
+
 .about-content {
     display: flex;
     flex-wrap: wrap;
@@ -595,6 +677,14 @@ nav {
 .about-text {
     flex: 1;
     min-width: 300px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.about-text p {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
 }
 
 .about-image {
@@ -716,8 +806,14 @@ nav {
     filter: brightness(0.8);
 }
 
+/* Allow clicks to pass through the SVG/image to the overlay */
+.project-image, .project-image * {
+    pointer-events: none;
+}
+
 .project-card:hover .project-image {
     filter: brightness(0.4);
+    pointer-events: none;
 }
 
 .project-info {
@@ -729,6 +825,8 @@ nav {
     background-color: rgba(42, 46, 51, 0.9);
     transform: translateY(100%);
     transition: all 0.5s;
+    pointer-events: auto;
+    z-index: 2;
 }
 
 .project-card:hover .project-info {
@@ -765,7 +863,6 @@ nav {
 
 .project-link:hover {
     background-color: var(--deep-plum);
-    transform: scale(1.05);
 }
 
 /* Contact Section */
@@ -912,7 +1009,6 @@ nav {
 }
 
 .social-btn:hover {
-    transform: translateY(-3px);
     background: linear-gradient(135deg, var(--burnt-coral), var(--deep-plum));
     border-color: var(--burnt-coral);
     box-shadow: 0 5px 15px rgba(217, 79, 50, 0.3);
@@ -938,7 +1034,6 @@ nav {
     height: 2px;
     background: linear-gradient(90deg, var(--burnt-coral), var(--deep-plum), var(--muted-gold));
     background-size: 200% 100%;
-    animation: gradient-shift 3s ease-in-out infinite;
 }
 
 .form-header {
@@ -1056,46 +1151,20 @@ select.form-input:focus {
     resize: vertical;
 }
 
+
 .submit-button {
-    background: linear-gradient(45deg, var(--burnt-coral), var(--deep-plum));
-    color: var(--soft-ivory);
-    border: none;
     padding: 16px 32px;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
     gap: 10px;
-    letter-spacing: 1px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(217, 79, 50, 0.3);
-    backdrop-filter: blur(10px);
     font-weight: 500;
-}
-
-.submit-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: all 0.6s ease;
 }
 
 .submit-button:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 25px rgba(217, 79, 50, 0.4), 0 0 20px rgba(217, 79, 50, 0.3);
     background: linear-gradient(45deg, var(--deep-plum), var(--burnt-coral));
-}
-
-.submit-button:hover::before {
-    left: 100%;
 }
 
 .submit-button:hover .button-icon {
@@ -1106,9 +1175,7 @@ select.form-input:focus {
     transition: transform 0.3s ease;
 }
 
-.submit-button:active {
-    transform: translateY(0) scale(0.98);
-}
+    /* Active state handled by .btn */
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -1235,10 +1302,6 @@ footer {
     color: var(--soft-ivory);
     margin-bottom: 10px;
     letter-spacing: 2px;
-    background: linear-gradient(45deg, var(--burnt-coral), var(--muted-gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .footer-tagline {
@@ -1432,6 +1495,17 @@ footer {
         padding-bottom: 30px;
     }
     
+    .hero .container.hero-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .hero-content {
+        text-align: center;
+    }
+    .hero-visual {
+        justify-content: center;
+    }
+
     .hero img {
         width: 250px;
         height: 250px;
@@ -1458,12 +1532,6 @@ footer {
         padding: 60px 20px;
     }
     
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    /* Projects section mobile */
     .projects {
         padding: 60px 20px;
     }
@@ -1479,7 +1547,6 @@ footer {
      }
  }
 
-/* Additional mobile optimizations for smaller screens */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
@@ -1644,38 +1711,7 @@ footer {
     }
 }
 
-/* Tech elements */
-.tech-grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.05;
-    pointer-events: none;
-}
-
-.tech-line {
-    position: absolute;
-    background-color: var(--muted-gold);
-}
-
-.horizontal-line {
-    height: 1px;
-    width: 100%;
-}
-
-.vertical-line {
-    width: 1px;
-    height: 100%;
-}
-
-.tech-circle {
-    position: absolute;
-    border: 1px solid var(--muted-gold);
-    border-radius: 50%;
-}
+/* Tech elements removed */
 
 @keyframes neon-glow {
     0% {
@@ -1727,6 +1763,24 @@ footer {
     transition: width 0.1s ease-out;
     box-shadow: 0 0 10px rgba(217, 79, 50, 0.5);
 }
+/* Project Modal Gallery */
+.modal { position: fixed; inset: 0; display: none; z-index: 10000; }
+.modal.open { display: block; }
+.modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); z-index: 0; }
+.modal-dialog { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(900px, 92vw); max-height: 80vh; background: rgba(42,46,51,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; z-index: 1; }
+.modal-close { position: absolute; right: 12px; top: 10px; background: transparent; color: var(--soft-ivory); border: none; font-size: 24px; cursor: pointer; z-index: 2; }
+.modal-media { flex: 1; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); }
+.modal-media img, .modal-media video { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); }
+.modal-caption { padding: 10px 16px; font-size: 0.9rem; color: var(--soft-ivory); border-top: 1px solid rgba(255,255,255,0.08); min-height: 40px; }
+.modal-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); color: var(--soft-ivory); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 2; }
+.modal-prev { left: 8px; }
+.modal-next { right: 8px; }
+@media (max-width: 768px) {
+  .modal-dialog { width: 96vw; max-height: 80vh; }
+  .modal-arrow { width: 36px; height: 36px; }
+  .modal-caption { font-size: 0.85rem; }
+}
+
 </style>
 </head>
 <body>
@@ -1788,16 +1842,18 @@ footer {
 
 <!-- Hero Section -->
 <section class="hero" id="home">
-<div class="tech-grid">
-    <div class="tech-line vertical-line" style="left: 30%"></div>
-    <div class="tech-line vertical-line" style="left: 50%"></div>
-    <div class="tech-circle" style="width: 150px; height: 150px; top: 20%; left: 50%"></div>
-    <div class="tech-circle" style="width: 300px; height: 300px; top: 60%; left: 10%"></div>
-</div>
-<div class="container">
-    <img src="assets/logo.svg" class="logo" alt="Zeyad Digital Logo" width="400" height="400">
-    <p class="hero-subtitle">Freelance graphic designer and coder creating engaging digital experiences, combining visual design, scripting, and creative problem-solving.</p>
-    <button class="cta-button">VIEW MY WORK</button>
+<div class="container hero-layout">
+    <div class="hero-content">
+<h1 class="hero-title">FREELANCE <span class="text-stack" data-text="DESIGNER"><span class="text-front">DESIGNER</span></span> & <span class="text-stack" data-text="DEVELOPER"><span class="text-front">DEVELOPER</span></span></h1>
+        <p class="hero-subtitle">Creating engaging digital experiences that combine visual design, scripting, and creative problem-solving.</p>
+        <div class="cta-row">
+            <a class="cta-button btn hover-raise" href="#projects">VIEW WORK</a>
+            <a class="cta-button btn btn-outline hover-raise" href="#contact">CONTACT ME</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <img src="assets/logo.svg" alt="Zeyad Digital Logo" width="400" height="400">
+    </div>
 </div>
 </section>
 
@@ -1807,9 +1863,13 @@ footer {
     <h2 class="section-title">ABOUT ME</h2>
     <div class="about-content">
         <div class="about-text">
-            <p>Creative Technologist with a passion for blending AI, design, and video to produce visually impactful content for social media, fashion, and branding. Skilled in tools such as Stable Diffusion (A1111), Adobe Photoshop, After Effects, DaVinci Resolve, and Topaz Video AI. Known for delivering innovative projects from face-swapping and frame enhancement to building automation workflows and simple Web3 dApps. A self-taught developer and designer with a deep curiosity for emerging technologies and decentralized platforms.</p>
+            <p>I’m Zeyad, a Creative Technologist who blends AI, design, and automation to craft digital experiences that are as intelligent as they are beautiful. My work bridges creativity and technology — from brand identity and UX/UI design to AI-driven automation, blockchain development, and video enhancement.</p>
             <br>
-            <p>Whether it’s crafting interfaces, scripting interactivity, or solving creative challenges, I focus on building engaging digital experiences that are both polished and purposeful. My work bridges aesthetics and function—designed to stand out and connect in today’s fast-moving digital world.</p>
+            <p>With hands-on expertise in tools like Stable Diffusion (A1111), Adobe Photoshop, After Effects, DaVinci Resolve, and Topaz Video AI, I create visually impactful content for social media, fashion, and branding. I’m known for delivering innovative projects that range from AI face-swapping and frame enhancement to building automation workflows, ecommerce websites, and simple Web3 dApps.</p>
+            <br>
+            <p>A self-taught designer and developer, I’m driven by curiosity for emerging technologies and how they reshape creativity — from decentralized platforms to generative AI.</p>
+            <br>
+            <p>Whether it’s crafting interfaces, scripting interactivity, or solving creative challenges, my goal is to build engaging, polished, and purposeful experiences that stand out in today’s fast-moving digital world.</p>
         </div>
         <div class="about-image">
             <div class="about-avatar">
@@ -1903,7 +1963,17 @@ footer {
             <div class="project-info">
                 <h3 class="project-title">ONE MODEL INFINITE POSSIBILITIES</h3>
                 <p class="project-category">AI FACE SWAP</p>
-                <a href="#" class="project-link">VIEW PROJECT</a>
+                <a href="#" class="project-link hover-raise">VIEW PROJECT</a>
+            </div>
+            <div class="gallery-data" hidden>
+                <div class="gallery-slide">
+                    <img src="assets/pp.png" alt="Face swap example 1" />
+                    <span class="caption">Model A swapped into Scene 1.</span>
+                </div>
+                <div class="gallery-slide">
+                    <img src="assets/pp2.png" alt="Face swap example 2" />
+                    <span class="caption">Consistent swap across lighting conditions.</span>
+                </div>
             </div>
         </div>
         <div class="project-card">
@@ -1919,7 +1989,17 @@ footer {
             <div class="project-info">
                 <h3 class="project-title">COACHING ADVERTISMENT</h3>
                 <p class="project-category">POSTER DESIGN</p>
-                <a href="#" class="project-link">VIEW PROJECT</a>
+                <a href="#" class="project-link hover-raise">VIEW PROJECT</a>
+            </div>
+            <div class="gallery-data" hidden>
+                <div class="gallery-slide">
+                    <img src="assets/pp.png" alt="Poster layout concept" />
+                    <span class="caption">Initial layout focusing on hierarchy.</span>
+                </div>
+                <div class="gallery-slide">
+                    <img src="assets/pp2.png" alt="Final poster design" />
+                    <span class="caption">Final export with brand colors and typography.</span>
+                </div>
             </div>
         </div>
         <div class="project-card">
@@ -1936,7 +2016,17 @@ footer {
             <div class="project-info">
                 <h3 class="project-title">MOIAT GUIDE</h3>
                 <p class="project-category">PRINTABLE GUIDE DESIGN</p>
-                <a href="#" class="project-link">VIEW PROJECT</a>
+                <a href="#" class="project-link hover-raise">VIEW PROJECT</a>
+            </div>
+            <div class="gallery-data" hidden>
+                <div class="gallery-slide">
+                    <img src="assets/pp.png" alt="Guide cover" />
+                    <span class="caption">Cover concept emphasizing clarity.</span>
+                </div>
+                <div class="gallery-slide">
+                    <img src="assets/pp2.png" alt="Guide interior" />
+                    <span class="caption">Interior spread with iconography and grids.</span>
+                </div>
             </div>
         </div>
         <div class="project-card">
@@ -1952,7 +2042,17 @@ footer {
             <div class="project-info">
                 <h3 class="project-title">CONSISTANT VIDEO FACE SWAP</h3>
                 <p class="project-category">VIDEO FACE SWAP</p>
-                <a href="#" class="project-link">VIEW PROJECT</a>
+                <a href="#" class="project-link hover-raise">VIEW PROJECT</a>
+            </div>
+            <div class="gallery-data" hidden>
+                <div class="gallery-slide">
+                    <img src="assets/pp.png" alt="Video swap frame" />
+                    <span class="caption">Frame showing seamless swap.</span>
+                </div>
+                <div class="gallery-slide">
+                    <img src="assets/pp2.png" alt="Lighting test frame" />
+                    <span class="caption">Consistency under varied lighting.</span>
+                </div>
             </div>
         </div>
         <div class="project-card">
@@ -1968,7 +2068,17 @@ footer {
             <div class="project-info">
                 <h3 class="project-title">BUILDING FUNCTIONAL EYE CATCHING WEBSITES</h3>
                 <p class="project-category">FULL STACK WEB DEVELOPMENT</p>
-                <a href="#" class="project-link">VIEW PROJECT</a>
+                <a href="#" class="project-link hover-raise">VIEW PROJECT</a>
+            </div>
+            <div class="gallery-data" hidden>
+                <div class="gallery-slide">
+                    <img src="assets/pp.png" alt="Homepage design" />
+                    <span class="caption">Homepage hero with conversion-focused CTA.</span>
+                </div>
+                <div class="gallery-slide">
+                    <img src="assets/pp2.png" alt="Dashboard UI" />
+                    <span class="caption">Dashboard component library and flows.</span>
+                </div>
             </div>
         </div>
         <div class="project-card">
@@ -1985,6 +2095,16 @@ footer {
                 <h3 class="project-title">PIXEL POUNDERS NFT P2E PROJECT</h3>
                 <p class="project-category">NFT AND SMART CONTRACT DESIGN</p>
                 <a href="#" class="project-link">VIEW PROJECT</a>
+            </div>
+            <div class="gallery-data" hidden>
+                <div class="gallery-slide">
+                    <img src="assets/pp.png" alt="NFT concept" />
+                    <span class="caption">Genesis art style and palette.</span>
+                </div>
+                <div class="gallery-slide">
+                    <img src="assets/pp2.png" alt="Contract interaction" />
+                    <span class="caption">Mint flow UI and smart contract hooks.</span>
+                </div>
             </div>
         </div>
     </div>
@@ -2057,19 +2177,19 @@ footer {
             
             <div class="contact-social">
                 <h3>Connect With Me</h3>
-                <div class="social-buttons">
-                    <a class="social-btn" onclick="copyEmailToClipboard()">
+            <div class="social-buttons">
+                <a class="social-btn hover-raise" onclick="copyEmailToClipboard()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
                             <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
                         </svg>
-                        Email
+                        EMAIL
                     </a>
-                    <a href="https://wa.me/60136578683?text=Hi%2C%20I%20found%20your%20contact%20through%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services." class="social-btn" target="_blank">
+                <a href="https://wa.me/60136578683?text=Hi%2C%20I%20found%20your%20contact%20through%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services." class="social-btn hover-raise" target="_blank">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="currentColor" stroke-width="2"/>
                         </svg>
-                        WhatsApp
+                        WHATSAPP
                     </a>
                 </div>
             </div>
@@ -2139,9 +2259,9 @@ footer {
                         </svg>
                         <span>I'll get back to you within 24 hours</span>
                     </div>
-                    <button type="submit" class="submit-button">
-                        <span class="button-text">SEND MESSAGE</span>
-                        <svg class="button-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <button type="submit" class="submit-button btn">
+                <span class="button-text">SEND MESSAGE</span>
+                <svg class="button-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2"/>
                             <polygon points="22,2 15,22 11,13 2,9 22,2" stroke="currentColor" stroke-width="2"/>
                         </svg>
@@ -2652,6 +2772,165 @@ if (document.readyState === 'loading') {
                 });
             });
         }
+// Modal Gallery Logic
+(function(){
+  let slides = [];
+  let index = 0;
+  console.log('[modal] IIFE initialized');
+
+  function getRefs() {
+    const modal = document.getElementById('projectModal');
+    const overlay = modal?.querySelector('.modal-overlay') || null;
+    const dialog = modal?.querySelector('.modal-dialog') || null;
+    const closeBtn = modal?.querySelector('.modal-close') || null;
+    const media = modal?.querySelector('.modal-media') || null;
+    const captionEl = modal?.querySelector('.modal-caption') || null;
+    const prevBtn = modal?.querySelector('.modal-prev') || null;
+    const nextBtn = modal?.querySelector('.modal-next') || null;
+    return { modal, overlay, dialog, closeBtn, media, captionEl, prevBtn, nextBtn };
+  }
+
+  function render() {
+    const { media, captionEl } = getRefs();
+    if (!media) return;
+    media.innerHTML = '';
+    const slide = slides[index];
+    if (!slide) return;
+    const videoEl = slide.querySelector('video');
+    const imgEl = slide.querySelector('img');
+    let node;
+    if (videoEl) {
+      node = videoEl.cloneNode(true);
+      node.controls = true;
+      node.autoplay = false;
+      node.style.maxWidth = '100%';
+      node.style.maxHeight = '100%';
+    } else if (imgEl) {
+      node = imgEl.cloneNode(true);
+    } else {
+      return;
+    }
+    media.appendChild(node);
+    if (captionEl) {
+      captionEl.textContent = slide.querySelector('.caption')?.textContent || '';
+    }
+    updateArrows();
+  }
+
+  function updateArrows(){
+    const { prevBtn, nextBtn } = getRefs();
+    if (!prevBtn || !nextBtn) return;
+    prevBtn.disabled = index <= 0;
+    nextBtn.disabled = index >= slides.length - 1;
+  }
+
+  function openWithSlides(slidesContainer){
+    console.log('[modal] openWithSlides: container=', !!slidesContainer);
+    const { modal } = getRefs();
+    slides = Array.from(slidesContainer.querySelectorAll('.gallery-slide'));
+    console.log('[modal] slides found:', slides.length);
+    index = 0;
+    modal?.classList.add('open');
+    console.log('[modal] modal open class added:', !!(modal && modal.classList.contains('open')));
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    render();
+  }
+
+  function close(){
+    const { modal, media, captionEl } = getRefs();
+    modal?.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+    if (media) media.innerHTML = '';
+    if (captionEl) captionEl.textContent = '';
+    slides = [];
+    index = 0;
+  }
+
+  function next(){ if (index < slides.length - 1) { index++; render(); } }
+  function prev(){ if (index > 0) { index--; render(); } }
+
+  // Bind direct click handlers on project links
+  document.querySelectorAll('.project-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('[modal] direct link click');
+      const card = link.closest('.project-card');
+      const data = card?.querySelector('.gallery-data');
+      console.log('[modal] direct handler data exists:', !!data);
+      if (data) openWithSlides(data);
+    });
+  });
+
+  // Capture clicks early; only intercept when a gallery is opened
+  document.addEventListener('click', (e) => {
+    // Prefer anchor clicks
+    let card = e.target.closest('.project-card');
+    if (!card) return;
+    const data = card.querySelector('.gallery-data');
+    if (data) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      console.log('[modal] capture link click, opening gallery');
+      openWithSlides(data);
+    }
+  }, true);
+
+  // Delegated handlers for modal controls
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.modal-overlay')) { close(); return; }
+    if (e.target.closest('.modal-close')) { close(); return; }
+    if (e.target.closest('.modal-next')) { next(); return; }
+    if (e.target.closest('.modal-prev')) { prev(); return; }
+  });
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  // Debug helpers: expose open and state inspection
+  window.openProjectModal = function(i = 0){
+    try {
+      const cards = document.querySelectorAll('.project-card');
+      const data = cards[i]?.querySelector('.gallery-data');
+      if (data) {
+        console.log('[modal] openProjectModal called for card index', i);
+        openWithSlides(data);
+      } else {
+        console.warn('[modal] No gallery-data for card index', i);
+      }
+    } catch (err) {
+      console.error('[modal] openProjectModal error:', err);
+    }
+  };
+
+  window.getProjectModalState = function(){
+    const { modal, prevBtn, nextBtn, dialog, media, captionEl } = getRefs();
+    return {
+      open: !!(modal && modal.classList.contains('open')),
+      dialogRect: dialog ? dialog.getBoundingClientRect() : null,
+      prevRect: prevBtn ? prevBtn.getBoundingClientRect() : null,
+      nextRect: nextBtn ? nextBtn.getBoundingClientRect() : null,
+      mediaRect: media ? media.getBoundingClientRect() : null,
+      captionText: captionEl ? captionEl.textContent : null,
+      slideCount: slides.length,
+      index
+    };
+  };
+})();
+
 </script>
+
+<!-- Project Modal -->
+<div id="projectModal" class="modal" aria-hidden="true">
+  <div class="modal-overlay" aria-label="Close modal"></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true">
+    <button class="modal-close" aria-label="Close">×</button>
+    <button class="modal-arrow modal-prev" aria-label="Previous">‹</button>
+    <div class="modal-media" aria-live="polite"></div>
+    <button class="modal-arrow modal-next" aria-label="Next">›</button>
+    <div class="modal-caption"></div>
+  </div>
+  </div>
+
 </body>
 </html>
