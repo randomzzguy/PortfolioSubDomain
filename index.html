@@ -10,6 +10,7 @@
     <link rel="manifest" href="assets/site.webmanifest">
     <title>Zeyad.Design</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
         :root {
             --dark-slate: #2A2E33;
             --soft-ivory: #ECE9E2;
@@ -29,7 +30,7 @@
 body {
     background-color: var(--dark-slate);
     color: var(--soft-ivory);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
     cursor: none; /* Hide the default cursor */
@@ -75,9 +76,8 @@ a, button, input, textarea {
 
 .border-accent {
     position: relative;
-    border: 2px solid var(--deep-plum);
-    box-shadow: 0 0 0 2px var(--dark-slate),
-                0 0 0 4px var(--muted-gold);
+    border: 6px solid rgb(236, 233, 226, 0.05);
+    box-shadow: 0 0 20px var(--burnt-coral), 0 0 35px var(--burnt-coral);
     padding: 20px;
 }
 
@@ -373,9 +373,7 @@ nav {
 }
 
 .nav-mobile .nav-link:hover {
-    border-color: var(--burnt-coral);
-    background: rgba(217, 79, 50, 0.1);
-    transform: scale(1.05);
+    color: var(--burnt-coral);
 }
 
 .nav-item {
@@ -390,31 +388,14 @@ nav {
     display: inline-block;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 1px;
 }
 
-.nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(217, 79, 50, 0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: 4px;
-}
+
 
 .nav-link:hover {
     color: var(--burnt-coral);
-    transform: translateY(-3px) scale(1.05);
-    text-shadow: 0 0 10px rgba(217, 79, 50, 0.5);
-}
-
-.nav-link:hover::before {
-    opacity: 1;
 }
 
 .nav-link::after {
@@ -498,7 +479,7 @@ nav {
     background: linear-gradient(45deg, var(--burnt-coral), var(--deep-plum));
     color: var(--soft-ivory);
     border: none;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -543,7 +524,6 @@ nav {
 .btn-outline {
     background: rgba(255, 255, 255, 0.15);
     background-color: rgba(255, 255, 255, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.8);
     box-shadow: none;
 }
 
@@ -660,7 +640,7 @@ nav {
     background-color: var(--burnt-coral);
 }
 
-.contact .section-title::after {
+.section-title::after {
     background: linear-gradient(90deg, rgba(217,79,70,0.2), rgba(217,79,70,1), rgba(191,165,90,0.8), rgba(74,38,115,1), rgba(217,79,70,0.2));
     background-size: 200% 100%;
     animation: shimmer 2.5s linear infinite;
@@ -981,7 +961,7 @@ nav {
     font-size: 1.1rem;
     color: var(--soft-ivory);
     margin-bottom: 20px;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 1px;
 }
 
@@ -1002,7 +982,7 @@ nav {
     color: var(--soft-ivory);
     text-decoration: none;
     font-size: 0.9rem;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 0.5px;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     backdrop-filter: blur(10px);
@@ -1118,7 +1098,7 @@ select.form-input:focus {
     margin-bottom: 10px;
     font-size: 0.9rem;
     color: var(--soft-ivory);
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 1px;
 }
 
@@ -1129,7 +1109,7 @@ select.form-input:focus {
     background: linear-gradient(135deg, rgba(236, 233, 226, 0.05), rgba(74, 38, 115, 0.05));
     border: 1px solid var(--deep-plum);
     color: var(--soft-ivory);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.9rem;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border-radius: 8px;
@@ -1296,7 +1276,7 @@ footer {
 }
 
 .footer-logo {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--soft-ivory);
@@ -1325,9 +1305,31 @@ footer {
     margin-bottom: 40px;
 }
 
-.footer-section h4 {
+.footer-section-left h4 {
     color: var(--burnt-coral);
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.footer-section-right h4 {
+    color: var(--burnt-coral);
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-section-mid h4 {
+    color: var(--burnt-coral);
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: center;
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 15px;
@@ -1339,21 +1341,23 @@ footer {
     list-style: none;
     padding: 0;
 }
-
-.footer-section li {
+.footer-section-left p {
+    text-align: left;
     color: var(--soft-ivory);
     opacity: 0.8;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     font-size: 0.9rem;
-    transition: opacity 0.3s ease;
+}
+.footer-section-right p {
+    text-align: right;
+    color: var(--soft-ivory);
+    opacity: 0.8;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
 }
 
-.footer-section li:hover {
-    opacity: 1;
-    color: var(--muted-gold);
-}
-
-.footer-section p {
+.footer-section-mid p {
+    text-align: center;
     color: var(--soft-ivory);
     opacity: 0.8;
     margin-bottom: 5px;
@@ -1388,7 +1392,7 @@ footer {
     font-size: 0.8rem;
     color: var(--soft-ivory);
     opacity: 0.7;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 1px;
     margin: 0;
 }
@@ -1767,10 +1771,11 @@ footer {
 .modal { position: fixed; inset: 0; display: none; z-index: 10000; }
 .modal.open { display: block; }
 .modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); z-index: 0; }
-.modal-dialog { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(900px, 92vw); max-height: 80vh; background: rgba(42,46,51,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; z-index: 1; }
+.modal-dialog { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(900px, 92vw); max-height: 95vh; min-height: 500px; background: rgba(42,46,51,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; z-index: 1; }
 .modal-close { position: absolute; right: 12px; top: 10px; background: transparent; color: var(--soft-ivory); border: none; font-size: 24px; cursor: pointer; z-index: 2; }
 .modal-media { flex: 1; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); }
-.modal-media img, .modal-media video { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); }
+.modal-media img, .modal-media video { max-width: 100%; max-height: calc(100% - 120px); border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); }
+.modal-media video.square-video { max-width: 45vh !important; max-height: 45vh !important; width: auto !important; height: auto !important; aspect-ratio: 1/1 !important; object-fit: contain !important; }
 .modal-caption { padding: 10px 16px; font-size: 0.9rem; color: var(--soft-ivory); border-top: 1px solid rgba(255,255,255,0.08); min-height: 40px; }
 .modal-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); color: var(--soft-ivory); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 2; }
 .modal-prev { left: 8px; }
@@ -2083,13 +2088,10 @@ footer {
         </div>
         <div class="project-card">
             <div class="project-image">
-                <svg width="100%" height="100%" viewBox="0 0 300 300">
-                    <rect width="300" height="300" fill="#2A2E33" />
-                    <rect x="50" y="50" width="50" height="50" fill="#4A2673" opacity="0.4" />
-                    <rect x="150" y="50" width="50" height="50" fill="#D94F46" opacity="0.4" />
-                    <rect x="50" y="150" width="50" height="50" fill="#BFA55A" opacity="0.4" />
-                    <rect x="150" y="150" width="50" height="50" fill="#4A2673" opacity="0.4" />
-                </svg>
+                <video width="100%" height="100%" style="object-fit: cover;" muted autoplay loop preload="metadata">
+                    <source src="pastWork6/nftVideo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="project-info">
                 <h3 class="project-title">PIXEL POUNDERS NFT P2E PROJECT</h3>
@@ -2098,12 +2100,11 @@ footer {
             </div>
             <div class="gallery-data" hidden>
                 <div class="gallery-slide">
-                    <img src="assets/pp.png" alt="NFT concept" />
-                    <span class="caption">Genesis art style and palette.</span>
-                </div>
-                <div class="gallery-slide">
-                    <img src="assets/pp2.png" alt="Contract interaction" />
-                    <span class="caption">Mint flow UI and smart contract hooks.</span>
+                    <video controls class="square-video">
+                             <source src="pastWork6/nftVideo.mp4" type="video/mp4">
+                             Your browser does not support the video tag.
+                         </video>
+                    <span class="caption">Pixel Pounders NFT collection showcase and gameplay mechanics.</span>
                 </div>
             </div>
         </div>
@@ -2283,21 +2284,24 @@ footer {
         </div>
         <div class="footer-divider"></div>
         <div class="footer-info">
-            <div class="footer-section">
-                <h4>Services</h4>
-                <ul>
-                    <li>Web Design & Development</li>
-                    <li>Graphic Design</li>
-                    <li>Video Production</li>
-                    <li>AI & Automation</li>
-                </ul>
-            </div>
-            <div class="footer-section">
+        <div class="footer-section-left">
                 <h4>Location</h4>
                 <p>Ipoh, Malaysia</p>
                 <p class="footer-note">Remote work worldwide</p>
             </div>
-            <div class="footer-section">
+            <div class="footer-section-mid">
+                <h4>Services</h4>
+                <ul>
+                    <p>Web Design & Development</p>
+                    <p>Graphic Design</p>
+                    <p>Video Production</p>
+                    <p>AI Integration</p>
+                    <p>Workflow Automation</p>
+                    <p>Web3 & Blockchain</p>
+                    <p>Consultation</p>
+                </ul>
+            </div>
+            <div class="footer-section-right">
                 <h4>Availability</h4>
                 <p>Open for new projects</p>
                 <p class="footer-note">Response within 24 hours</p>
