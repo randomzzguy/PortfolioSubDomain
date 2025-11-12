@@ -1,2 +1,1 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.webm filter=lfs diff=lfs merge=lfs -text
+# (Intentionally left blank) — removed Git LFS tracking for videos
